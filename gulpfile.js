@@ -5,16 +5,25 @@ var gulp = require('gulp'),
     watch = require('gulp-watch'),
     notifier = require('node-notifier'),
     sourcemaps = require('gulp-sourcemaps'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    cssmin = require('gulp-minify-css'),
+    sass = require('gulp-sass');
 
 var path = {
     src: {
-        js_main: 'Scripts/main.js',
-        js_vendor: 'Scripts/vendor.js'
+        js: {
+            main: 'Scripts/main.js',
+            vendor: 'Scripts/vendor.js'
+        },
+        css: {
+            main: 'Styles/main.scss',
+            vendor: 'Styles/vendor.scss'
+        }
     },
     build: {
         basePath: 'wwwroot',
-        js: 'js'
+        js: 'js',
+        css: 'css'
     }
 };
 
@@ -29,23 +38,41 @@ function swallowError(error) {
 }
 
 gulp.task('js:build', function () {
-    gulp.src(path.src.js_main)
+    gulp.src(path.src.js.main)
         .pipe(rigger())
         .pipe(sourcemaps.init())
         .pipe(uglify())
         .pipe(sourcemaps.write())
         .on('error', swallowError)
         .pipe(gulp.dest(path.build.basePath + '/' + path.build.js));
-    gulp.src(path.src.js_vendor)
+    gulp.src(path.src.js.vendor)
         .pipe(rigger())
         .on('error', swallowError)
         .pipe(gulp.dest(path.build.basePath + '/' + path.build.js));
 });
 
+gulp.task('css:build', function () {
+    gulp.src(path.src.css.main)
+        .pipe(sass())
+        .pipe(sourcemaps.init())
+        .pipe(cssmin())
+        .pipe(sourcemaps.write())
+        .on('error', swallowError)
+        .pipe(gulp.dest(path.build.basePath + '/' + path.build.css));
+    gulp.src(path.src.css.vendor)
+        .pipe(sass())
+        .pipe(cssmin())
+        .on('error', swallowError)
+        .pipe(gulp.dest(path.build.basePath + '/' + path.build.css));
+});
+
 gulp.task('watch', function() {
-    watch(path.src.js, function(event, cb) {
+    watch([path.src.js.main, path.src.js.vendor], function(event, cb) {
         gulp.start('js:build');
+    });
+    watch([path.src.css.main, path.src.css.vendor], function(event, cb) {
+        gulp.start('css:build');
     });
 });
 
-gulp.task('default', ['js:build']);
+gulp.task('default', ['js:build', 'css:build']);
