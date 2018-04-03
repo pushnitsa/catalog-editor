@@ -12,9 +12,9 @@ namespace CatalogEditor.Controllers
         }
 
         [HttpGet("/")]
-        public async void Index()
+        public IActionResult Index()
         {
-            
+            return View();
         }
     }
 }
