@@ -23,6 +23,8 @@ namespace CatalogEditor
 
         public void Configure(IApplicationBuilder app)
         {
+            app.UseStaticFiles();
+
             if (_hostingEnvironment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
