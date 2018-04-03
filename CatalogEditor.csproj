@@ -13,4 +13,9 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
   </ItemGroup>
 
+  <Target Name="BuildFront" AfterTargets="Build">
+    <Message Importance="High" Text="############### Building assets ###############" />
+    <Exec Command="npm run dev-build" Condition=" '$(Configuration)' == 'Debug' " />
+  </Target>
+
 </Project>
