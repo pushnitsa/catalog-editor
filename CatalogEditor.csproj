@@ -4,9 +4,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Styles" />
-    <Folder Include="Views" />
-    <Folder Include="wwwroot\" />
-    <Folder Include="wwwroot\lib" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
