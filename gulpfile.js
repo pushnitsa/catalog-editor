@@ -6,7 +6,7 @@ var gulp = require('gulp'),
     notifier = require('node-notifier'),
     sourcemaps = require('gulp-sourcemaps'),
     uglify = require('gulp-uglify'),
-    cssmin = require('gulp-minify-css'),
+    cleancss = require('gulp-clean-css'),
     sass = require('gulp-sass');
 
 var path = {
@@ -26,8 +26,8 @@ var path = {
         css: 'css'
     },
     watch: {
-        css: 'Styles/*',
-        js: 'Scripts/*'
+        css: 'Styles/**/*',
+        js: 'Scripts/**/*'
     }
 };
 
@@ -59,13 +59,13 @@ gulp.task('css:build', function () {
     gulp.src(path.src.css.main)
         .pipe(sass())
         .pipe(sourcemaps.init())
-        .pipe(cssmin())
+        .pipe(cleancss({rebase: false}))
         .pipe(sourcemaps.write())
         .on('error', swallowError)
         .pipe(gulp.dest(path.build.basePath + '/' + path.build.css));
     gulp.src(path.src.css.vendor)
         .pipe(sass())
-        .pipe(cssmin())
+        .pipe(cleancss({rebase: false}))
         .on('error', swallowError)
         .pipe(gulp.dest(path.build.basePath + '/' + path.build.css));
 });
