@@ -24,6 +24,10 @@ var path = {
         basePath: 'wwwroot',
         js: 'js',
         css: 'css'
+    },
+    watch: {
+        css: 'Styles/*',
+        js: 'Scripts/*'
     }
 };
 
@@ -67,10 +71,10 @@ gulp.task('css:build', function () {
 });
 
 gulp.task('watch', function() {
-    watch([path.src.js.main, path.src.js.vendor], function(event, cb) {
+    watch(path.watch.js, function(event, cb) {
         gulp.start('js:build');
     });
-    watch([path.src.css.main, path.src.css.vendor], function(event, cb) {
+    watch(path.watch.css, function(event, cb) {
         gulp.start('css:build');
     });
 });
