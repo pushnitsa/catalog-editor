@@ -1,14 +1,28 @@
 ﻿<!DOCTYPE html>
-
-<html>
+<html lang="en" ng-app="catalogApp">
 <head>
-    <title>title</title>
-    <link href="~/css/vendor.css" asp-append-version="true" type="text/css" />
-    <link href="~/css/main.css" asp-append-version="true" type="text/css" />
-    <script type="text/javascript" src="~/js/vendor.js" asp-append-version="true"></script>
-    <script type="text/javascript" src="~/js/main.js" asp-append-version="true"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>Редактор каталога моей мечты!</title>
+    <link href="~/css/vendor.css" rel="stylesheet" asp-append-version="true" type="text/css"/>
+    <link href="~/css/main.css" rel="stylesheet" asp-append-version="true" type="text/css"/>
+    
 </head>
 <body>
+    
+    <div class="container">
+    
+        <div class="main-window well" ng-controller="catalogController">
+            <div class="catalog-window">{{test}}</div>
+            <div class="items-window">&nbsp;</div>
+            <div class="detail-window">&nbsp;</div>
+        </div>
+    
+    </div>
 
+    <script type="text/javascript" src="~/js/vendor.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/main.js" asp-append-version="true"></script>
 </body>
 </html>
