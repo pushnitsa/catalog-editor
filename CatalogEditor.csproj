@@ -9,6 +9,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\fonts" />
+  </ItemGroup>
   <Target Name="BuildFront" AfterTargets="Build">
     <Message Importance="High" Text="############### Building assets ###############" />
     <Exec Command="npm run dev-build" Condition=" '$(Configuration)' == 'Debug' " />
