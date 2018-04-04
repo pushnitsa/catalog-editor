@@ -10,7 +10,9 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Scripts\Directives" />
     <Folder Include="wwwroot\fonts" />
+    <Folder Include="wwwroot\img" />
   </ItemGroup>
   <Target Name="BuildFront" AfterTargets="Build">
     <Message Importance="High" Text="############### Building assets ###############" />
