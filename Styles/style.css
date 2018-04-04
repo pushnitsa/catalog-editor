@@ -1,0 +1,21 @@
+body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
+}
+
+.main-window {
+    width: 850px;
+    height: 500px;
+    padding: 15px;
+    margin: 0 auto;
+}
+
+.catalog-window, .items-window, .detail-window {
+    position: relative;
+    width: 33%;
+    height: 470px;
+    margin-right: 1px;
+    border: 1px solid #000;
+    float: right;
+}
