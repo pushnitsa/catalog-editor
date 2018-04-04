@@ -15,7 +15,16 @@
     <div class="container">
     
         <div class="main-window well" ng-controller="catalogController">
-            <div class="catalog-window">{{test}}</div>
+            <div class="catalog-window">
+                <div
+                    data-angular-treeview="true"
+                    data-tree-id="abc"
+                    data-tree-model="categories"
+                    data-node-id="id"
+                    data-node-label="title"
+                    data-node-children="childs" >
+                </div>
+            </div>
             <div class="items-window">&nbsp;</div>
             <div class="detail-window">&nbsp;</div>
         </div>
