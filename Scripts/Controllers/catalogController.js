@@ -1,58 +1,8 @@
 var catalogApp = angular.module('catalogApp');
 
-catalogApp.controller('catalogController', ['$scope', function ($scope) {
-    $scope.categories = [
-        {
-            title: 'Test1',
-            id : 1,
-            childs: null
-        },
-        {
-            title: 'Test2',
-            id : 2,
-            childs: [
-                {
-                    title: 'ChildTest1',
-                    id: 4,
-                    childs: [
-                        {
-                            title: 'ChildChildTest1',
-                            id: 6,
-                            childs: null
-                        }
-                    ]
-                },
-                {
-                    title: 'ChildTest2',
-                    id: 5,
-                    childs: null
-                }
-            ]
-        },
-        {
-            title: 'Test3',
-            id : 3,
-            childs: null
-        }
-    ];
+catalogApp.controller('catalogController', ['$scope', 'apiCommunicator', function ($scope, apiCommunicator) {
     
-    $scope.items = [
-        {
-            Name: 'Test1',
-            Price: 0.5,
-            Qty: 10
-        },
-        {
-            Name: 'Test2',
-            Price: 0.4,
-            Qty: 9
-        },
-        {
-            Name: 'Test3',
-            Price: 0.3,
-            Qty: 8
-        }
-    ];
+    apiCommunicator.getCategories($scope.categories = []);
     
     $scope.currentItem = {
         Image: 'empty.png',
@@ -62,6 +12,7 @@ catalogApp.controller('catalogController', ['$scope', function ($scope) {
     };
 
     $scope.toggleVisible = function (category, elId) {
+        
         category.visible = !category.visible;
         
         var el = $('#'+elId); 
@@ -76,7 +27,49 @@ catalogApp.controller('catalogController', ['$scope', function ($scope) {
         
     };
     
-    $scope.uploadImage = function (){
+    $scope.uploadImage = function () {
         
     };
+    
+    $scope.selectedCategory = null;
+    
+    $scope.itemsWindowVisible = false;
+    $scope.itemsLoaderVisible = false;
+    
+    $scope.selectCategory = function (category, elId) {
+        $scope.itemsWindowVisible = true;
+        
+        purgeSelectedCategory();
+        
+        $scope.selectedCategory = category;
+        
+        var el = $('#'+elId);
+        
+        el.addClass('selected-category');
+        
+        $scope.itemsLoaderVisible = true;
+        updateProducts();
+    };
+    
+    function purgeSelectedCategory() {
+        
+        $scope.selectedCategory = null;
+        
+        var categoryElements = $('.category-name');
+
+        categoryElements.each(function (key, value) {
+            $(value).removeClass('selected-category');
+        });
+    }
+    
+    function updateProducts() {
+        apiCommunicator.getProducts($scope.selectedCategory.Id, $scope.items = []);
+        $scope.itemsWindowVisible = true;
+        $scope.itemsLoaderVisible = false;
+    }
+    
+    $scope.hideItemsWindow = function () {
+        $scope.itemsWindowVisible = false;
+    }
+    
 }]);
