@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('catalogApp', ['angularTreeview']);
+angular.module('catalogApp', []);
 
 /* Controllers */
 
