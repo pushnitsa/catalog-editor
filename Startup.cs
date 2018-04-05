@@ -1,5 +1,7 @@
 ﻿using CatalogEditor.DatabaseContext;
+using CatalogEditor.Deserializer;
 using CatalogEditor.Initializer;
+using CatalogEditor.Serializer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +25,10 @@ namespace CatalogEditor
             services.AddMvc();
 
             services.AddContext(_configuration.GetValue<string>("DatabaseName"));
-            services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
+            services
+                .AddTransient<IEntitySerializer, EntitySerializer>()
+                .AddTransient<IEntityDeserializer, EntityDeserializer>()
+                .AddTransient<IDatabaseInitializer, DatabaseInitializer>();
         }
 
         public void Configure(IApplicationBuilder app, IDatabaseInitializer initializer)
