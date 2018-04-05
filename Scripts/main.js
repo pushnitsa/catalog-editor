@@ -6,5 +6,8 @@ angular.module('catalogApp', []);
 
 //= Controllers/catalogController.js
 
-
 /* Directives */
+
+/* Services */
+
+//= Services/apiCommunicator.js
