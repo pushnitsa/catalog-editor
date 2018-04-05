@@ -8,6 +8,7 @@ namespace CatalogEditor.Models
         public Category()
         {
             Childs = new List<Category>();
+            Products = new List<Product>();
         }
         
         public int Id { get; private set; }
@@ -17,5 +18,7 @@ namespace CatalogEditor.Models
         public ICollection<Category> Childs { get; set; }
         
         public int? CategoryId { get; set; }
+        
+        public ICollection<Product> Products { get; set; }
     }
 }
