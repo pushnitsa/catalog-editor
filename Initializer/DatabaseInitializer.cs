@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using CatalogEditor.DatabaseContext;
+using CatalogEditor.Models;
 
 namespace CatalogEditor.Initializer
 {
@@ -14,7 +15,24 @@ namespace CatalogEditor.Initializer
         
         public async Task Seed()
         {
-            throw new System.NotImplementedException();
+            using (var context = _contextFactory.Create())
+            {
+                var category = new Category { Name = "TestCategory" };
+
+                await context.Categories.AddAsync(category);
+                
+                var product = new Product
+                {
+                    Category = category,
+                    Name = "TestProduct",
+                    Price = 10M,
+                    Quantity = 100
+                };
+
+                await context.Products.AddAsync(product);
+
+                await context.SaveChangesAsync();
+            }
         }
     }
 }
