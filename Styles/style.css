@@ -23,3 +23,11 @@ body {
 .item-head, .item-head span, .detail-head, .detail-head span {
     padding: 10px 10px;
 }
+
+.selected-category {
+    color: red;
+}
+
+.category-name:hover, .header-icon:hover {
+    cursor: pointer;
+}

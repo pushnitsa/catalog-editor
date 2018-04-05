@@ -17,42 +17,44 @@
         <div class="main-window well" ng-controller="catalogController">
             <div class="catalog-window">
                 <script type="text/ng-template" id="category-tree">
-                    <i class="glyphicon glyphicon-plus category-tree" id='category{{category.id}}' ng-if="category.childs" ng-click="toggleVisible(category, 'category'+category.id)"></i>
-                    {{ category.title }}
-                    <ul ng-if="category.childs" ng-show="category.visible">
-                        <li ng-repeat="category in category.childs" ng-include="'category-tree'">           
+                    <i class="glyphicon glyphicon-plus category-tree" id='category{{category.Id}}' ng-if="category.Childs" ng-click="toggleVisible(category, 'category'+category.Id)"></i>
+                    <span ng-click="selectCategory(category, 'categoryName'+category.Id)" class="category-name" id="categoryName{{category.Id}}">{{ category.Name }}</span>
+                    <ul ng-if="category.Childs" ng-show="category.visible">
+                        <li ng-repeat="category in category.Childs" ng-include="'category-tree'">           
                         </li>
                     </ul>
                 </script>
-                <ul class="tree">
+                <h3 class="text-center" ng-hide="categories.length"><i class="fa fa-spinner fa-spin"></i> Загрузка...</h3>
+                <ul class="tree" ng-show="categories.length">
                     <li ng-repeat="category in categories" ng-include="'category-tree'"></li>
                 </ul>
             </div>
-            <div class="items-window">
-                @*<h3 class="text-center"><i class="fa fa-spinner fa-spin"></i> Загрузка...</h3>*@
-                <div>
+            <div class="items-window" ng-show="itemsWindowVisible">
+                <h3 class="text-center" ng-show="itemsLoaderVisible"><i class="fa fa-spinner fa-spin"></i> Загрузка...</h3>
+                <div ng-hide="itemsLoaderVisible">
                     <div class="item-head">
-                        <span><i class="fa fa-plus-square fa-2x"></i></span>
-                        <span><i class="fa fa-trash fa-2x"></i></span>
-                        <span><i class="fa fa-window-close-o fa-2x pull-right"></i></span>
+                        <span class="header-icon"><i class="fa fa-plus-square fa-2x"></i></span>
+                        <span class="header-icon"><i class="fa fa-trash fa-2x"></i></span>
+                        <span class="header-icon"><i class="fa fa-window-close-o fa-2x pull-right" ng-click="hideItemsWindow()"></i></span>
                         <hr/>
+                    </div>
+                    <div>
                         <table class="table">
                             <tr>
                                 <th></th><th>Name</th><th>Price</th><th>Qty</th>
                             </tr>
                             <tr ng-repeat="item in items">
-                                <td><input type="checkbox"></td><td>{{item.Name}}</td><td>$ {{item.Price}}</td><td>{{item.Qty}}</td>
+                                <td><input type="checkbox"></td><td>{{item.Name}}</td><td>$ {{item.Price}}</td><td>{{item.Quantity}}</td>
                             </tr>
                         </table>
                     </div>
-                    <div></div>
                 </div>
             </div>
             <div class="detail-window">
                 <div class="detail-head">
-                    <span><i class="fa fa-save fa-2x"></i></span>
-                    <span><i class="fa fa-times fa-2x"></i></span>
-                    <span><i class="fa fa-window-close-o fa-2x pull-right"></i></span>
+                    <span class="header-icon"><i class="fa fa-save fa-2x"></i></span>
+                    <span class="header-icon"><i class="fa fa-times fa-2x"></i></span>
+                    <span class="header-icon"><i class="fa fa-window-close-o fa-2x pull-right"></i></span>
                     <hr/>
                     <form class="form-horizontal">
                         <div class="form-group">
