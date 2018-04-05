@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using CatalogEditor.DatabaseContext;
+using CatalogEditor.Initializer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,9 +23,10 @@ namespace CatalogEditor
             services.AddMvc();
 
             services.AddContext(_configuration.GetValue<string>("DatabaseName"));
+            services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IDatabaseInitializer initializer)
         {
             app.UseStaticFiles();
 
@@ -33,6 +36,8 @@ namespace CatalogEditor
             }
 
             app.UseMvc();
+
+            initializer.Seed().Wait();
         }
     }
 }
