@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using CatalogEditor.DatabaseContext;
 using CatalogEditor.Models;
 
@@ -17,13 +18,20 @@ namespace CatalogEditor.Initializer
         {
             using (var context = _contextFactory.Create())
             {
-                var category = new Category { Name = "TestCategory" };
+                var category1 = new Category { Name = "Одежда, обувь, аксессуары" };
+                var category2 = new Category { Name = "Женская одежда"};
+                var category3 = new Category { Name = "Верхняя" };
+                var category4 = new Category { Name = "Плащи" };
+                
+                category1.Childs.Add(category2);
+                category2.Childs.Add(category3);
+                category3.Childs.Add(category4);
 
-                await context.Categories.AddAsync(category);
+                await context.Categories.AddRangeAsync(category1, category2, category3, category4);
                 
                 var product = new Product
                 {
-                    Category = category,
+                    Category = category1,
                     Name = "TestProduct",
                     Price = 10M,
                     Quantity = 100
