@@ -24,21 +24,13 @@ namespace CatalogEditor.Controllers.Api
             _deserializer = deserializer;
         }
 
-        [HttpGet("get/{categoryId}")]
-        public async Task<IActionResult> GetProducts(int categoryId)
-        {
-            var products = await _productProcessor.GetProductsAsync(categoryId);
-            
-            return new ObjectResult(_serializer.Serialize(products));
-        }
-
         [HttpDelete]
         public IActionResult DeleteProducts()
         {
             return new ObjectResult(true);
         }
 
-        [HttpPut()]
+        [HttpPut]
         public IActionResult UpdateProduct()
         {
             return new ObjectResult("");
