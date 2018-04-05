@@ -8,6 +8,7 @@ namespace CatalogEditor.Models.Configurations
         public void Configure(EntityTypeBuilder<Product> builder)
         {
             builder.Property(e => e.Name).IsRequired();
+            builder.Property(e => e.Image).IsRequired();
         }
     }
 }
