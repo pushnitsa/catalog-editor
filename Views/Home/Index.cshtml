@@ -16,17 +16,73 @@
     
         <div class="main-window well" ng-controller="catalogController">
             <div class="catalog-window">
-                <div
-                    data-angular-treeview="true"
-                    data-tree-id="abc"
-                    data-tree-model="categories"
-                    data-node-id="id"
-                    data-node-label="title"
-                    data-node-children="childs" >
+                <script type="text/ng-template" id="category-tree">
+                    <i class="glyphicon glyphicon-plus category-tree" id='category{{category.id}}' ng-if="category.childs" ng-click="toggleVisible(category, 'category'+category.id)"></i>
+                    {{ category.title }}
+                    <ul ng-if="category.childs" ng-show="category.visible">
+                        <li ng-repeat="category in category.childs" ng-include="'category-tree'">           
+                        </li>
+                    </ul>
+                </script>
+                <ul class="tree">
+                    <li ng-repeat="category in categories" ng-include="'category-tree'"></li>
+                </ul>
+            </div>
+            <div class="items-window">
+                @*<h3 class="text-center"><i class="fa fa-spinner fa-spin"></i> Загрузка...</h3>*@
+                <div>
+                    <div class="item-head">
+                        <span><i class="fa fa-plus-square fa-2x"></i></span>
+                        <span><i class="fa fa-trash fa-2x"></i></span>
+                        <span><i class="fa fa-window-close-o fa-2x pull-right"></i></span>
+                        <hr/>
+                        <table class="table">
+                            <tr>
+                                <th></th><th>Name</th><th>Price</th><th>Qty</th>
+                            </tr>
+                            <tr ng-repeat="item in items">
+                                <td><input type="checkbox"></td><td>{{item.Name}}</td><td>$ {{item.Price}}</td><td>{{item.Qty}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div></div>
                 </div>
             </div>
-            <div class="items-window">&nbsp;</div>
-            <div class="detail-window">&nbsp;</div>
+            <div class="detail-window">
+                <div class="detail-head">
+                    <span><i class="fa fa-save fa-2x"></i></span>
+                    <span><i class="fa fa-times fa-2x"></i></span>
+                    <span><i class="fa fa-window-close-o fa-2x pull-right"></i></span>
+                    <hr/>
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Фото</label>
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <img ng-src="/img/{{currentItem.Image}}" width="64">
+                                <a href="#" ng-click="uploadImage()">Загрузить</a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Название</label>
+                            <div class="col-sm-8 pull-right">
+                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="currentItem.Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Цена</label>
+                            <div class="col-sm-8 pull-right">
+                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="currentItem.Price">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-2 control-label">Количество</label>
+                            <div class="col-sm-8 pull-right">
+                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="currentItem.Qty">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     
     </div>

@@ -35,11 +35,48 @@ catalogApp.controller('catalogController', ['$scope', function ($scope) {
             childs: null
         }
     ];
-
-    $scope.$watch( 'abc.currentNode', function( newObj, oldObj ) {
-        if( $scope.abc && angular.isObject($scope.abc.currentNode) ) {
-            console.log( 'Node Selected!!' );
-            console.log( $scope.abc.currentNode );
+    
+    $scope.items = [
+        {
+            Name: 'Test1',
+            Price: 0.5,
+            Qty: 10
+        },
+        {
+            Name: 'Test2',
+            Price: 0.4,
+            Qty: 9
+        },
+        {
+            Name: 'Test3',
+            Price: 0.3,
+            Qty: 8
         }
-    }, false);
+    ];
+    
+    $scope.currentItem = {
+        Image: 'empty.png',
+        Name: 'Test1',
+        Price: 0.5,
+        Qty: 10
+    };
+
+    $scope.toggleVisible = function (category, elId) {
+        category.visible = !category.visible;
+        
+        var el = $('#'+elId); 
+        
+        if (category.visible) {
+            el.removeClass('glyphicon-plus');
+            el.addClass('glyphicon-minus');
+        } else {
+            el.removeClass('glyphicon-minus');
+            el.addClass('glyphicon-plus');
+        }
+        
+    };
+    
+    $scope.uploadImage = function (){
+        
+    };
 }]);

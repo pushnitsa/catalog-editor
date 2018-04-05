@@ -19,3 +19,7 @@ body {
     border: 1px solid #000;
     float: left;
 }
+
+.item-head, .item-head span, .detail-head, .detail-head span {
+    padding: 10px 10px;
+}
