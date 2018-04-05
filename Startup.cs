@@ -19,6 +19,8 @@ namespace CatalogEditor
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddContext();
         }
 
         public void Configure(IApplicationBuilder app)
