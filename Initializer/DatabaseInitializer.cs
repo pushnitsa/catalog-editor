@@ -34,7 +34,8 @@ namespace CatalogEditor.Initializer
                     Category = category1,
                     Name = "TestProduct",
                     Price = 10M,
-                    Quantity = 100
+                    Quantity = 100,
+                    Image = "img.png"
                 };
 
                 await context.Products.AddAsync(product);
