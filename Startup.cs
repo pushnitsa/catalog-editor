@@ -2,6 +2,7 @@
 using CatalogEditor.Deserializer;
 using CatalogEditor.Fetcher;
 using CatalogEditor.Initializer;
+using CatalogEditor.Processor;
 using CatalogEditor.Serializer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,7 @@ namespace CatalogEditor
                 .AddTransient<IEntitySerializer, EntitySerializer>()
                 .AddTransient<IEntityDeserializer, EntityDeserializer>()
                 .AddTransient<ICategoryFetcher, CategoryFetcher>()
+                .AddTransient<ProductProcessor>()
                 .AddTransient<IDatabaseInitializer, DatabaseInitializer>();
         }
 
