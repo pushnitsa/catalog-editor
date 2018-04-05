@@ -20,7 +20,7 @@ namespace CatalogEditor
         {
             services.AddMvc();
 
-            services.AddContext();
+            services.AddContext(_configuration.GetValue<string>("DatabaseName"));
         }
 
         public void Configure(IApplicationBuilder app)

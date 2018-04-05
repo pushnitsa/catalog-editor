@@ -5,12 +5,12 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     public static class AddContextExtension
     {
-        public static IServiceCollection AddContext(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddContext(this IServiceCollection serviceCollection, string dbName)
         {
             return serviceCollection
                     .AddTransient(
                         s => new DbContextOptionsBuilder()
-                            .UseInMemoryDatabase("CatalogDb")
+                            .UseInMemoryDatabase(dbName)
                             .Options
                     )
                     .AddTransient<IContextFactory, ContextFactory>();
