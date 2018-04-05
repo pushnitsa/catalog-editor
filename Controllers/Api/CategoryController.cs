@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using CatalogEditor.Fetcher;
+using CatalogEditor.Serializer;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CatalogEditor.Controllers.Api
@@ -6,16 +8,21 @@ namespace CatalogEditor.Controllers.Api
     [Route("api/category")]
     public class CategoryController : Controller
     {
-
-        public CategoryController()
+        private readonly IEntitySerializer _serializer;
+        private readonly ICategoryFetcher _categoryFetcher;
+        
+        public CategoryController(IEntitySerializer serializer, ICategoryFetcher categoryFetcher)
         {
-            
+            _serializer = serializer;
+            _categoryFetcher = categoryFetcher;
         }
 
         [HttpGet("get")]
         public async Task<IActionResult> GetCategories()
         {
-            return new ObjectResult("");
+            var categories = await _categoryFetcher.GetCategoriesAsync();
+            
+            return new ObjectResult(_serializer.Serialize(categories));
         }
     }
 }
