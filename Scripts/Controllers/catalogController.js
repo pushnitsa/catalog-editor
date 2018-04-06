@@ -55,6 +55,8 @@ catalogApp.controller('catalogController', ['$scope', 'apiCommunicator', functio
         
         $scope.selectedCategory = null;
         
+        $scope.items = null;
+        
         var categoryElements = $('.category-name');
 
         categoryElements.each(function (key, value) {
@@ -63,13 +65,23 @@ catalogApp.controller('catalogController', ['$scope', 'apiCommunicator', functio
     }
     
     function updateProducts() {
-        apiCommunicator.getProducts($scope.selectedCategory.Id, $scope.items = []);
+        apiCommunicator.getProducts($scope.selectedCategory.Id, $scope.items = [], hideItemsLoader);
         $scope.itemsWindowVisible = true;
+    }
+    
+    function hideItemsLoader() {
         $scope.itemsLoaderVisible = false;
     }
     
     $scope.hideItemsWindow = function () {
         $scope.itemsWindowVisible = false;
+    };
+    
+    $scope.detailWindowVisible = false;
+    $scope.detailLoaderVisible = false;
+    
+    function hideDetailLoader() {
+        $scope.detailLoaderVisible = false;
     }
     
 }]);

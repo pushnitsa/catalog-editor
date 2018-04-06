@@ -50,36 +50,37 @@
                     </div>
                 </div>
             </div>
-            <div class="detail-window">
-                <div class="detail-head">
+            <div class="detail-window" ng-show="detailWindowVisible">
+                <h3 class="text-center" ng-show="detailLoaderVisible"><i class="fa fa-spinner fa-spin"></i> Загрузка...</h3>
+                <div class="detail-head" ng-hide="detailLoaderVisible">
                     <span class="header-icon"><i class="fa fa-save fa-2x"></i></span>
                     <span class="header-icon"><i class="fa fa-times fa-2x"></i></span>
                     <span class="header-icon"><i class="fa fa-window-close-o fa-2x pull-right"></i></span>
                     <hr/>
                     <form class="form-horizontal">
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">Фото</label>
+                            <label class="col-sm-2 control-label">Фото</label>
                             <div class="col-sm-8 col-sm-offset-2">
-                                <img ng-src="/img/{{currentItem.Image}}" width="64">
+                                <img ng-src="/api/product/1/image" width="64">
                                 <a href="#" ng-click="uploadImage()">Загрузить</a>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">Название</label>
+                            <label for="productName" class="col-sm-2 control-label">Название</label>
                             <div class="col-sm-8 pull-right">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="currentItem.Name">
+                                <input type="text" class="form-control" id="productName" placeholder="Товар" ng-model="currentItem.Name">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">Цена</label>
+                            <label for="productPrice" class="col-sm-2 control-label">Цена</label>
                             <div class="col-sm-8 pull-right">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="currentItem.Price">
+                                <input type="text" class="form-control" id="productPrice" placeholder="100" ng-model="currentItem.Price">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputEmail3" class="col-sm-2 control-label">Количество</label>
+                            <label for="productQuantity" class="col-sm-2 control-label">Количество</label>
                             <div class="col-sm-8 pull-right">
-                                <input type="email" class="form-control" id="inputEmail3" placeholder="Email" ng-model="currentItem.Qty">
+                                <input type="text" class="form-control" id="productQuantity" placeholder="0.5" ng-model="currentItem.Qty">
                             </div>
                         </div>
                     </form>

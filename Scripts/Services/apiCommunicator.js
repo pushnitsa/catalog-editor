@@ -13,13 +13,14 @@ catalogApp.factory('apiCommunicator', ['$http', function ($http) {
                 });
         },
         
-        getProducts: function (categoryId, products) {
+        getProducts: function (categoryId, products, callback) {
             $http
                 .get('/api/category/' + categoryId + '/products')
                 .then(function success(response) {
                     response.data.forEach(function (value) {
                         products.push(value);
-                    })
+                    });
+                    callback();
                 });
         }
     }
