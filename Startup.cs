@@ -32,6 +32,13 @@ namespace CatalogEditor
                 .AddTransient<IEntityDeserializer, EntityDeserializer>()
                 .AddTransient<ICategoryFetcher, CategoryFetcher>()
                 .AddTransient<ProductProcessor>()
+                .AddTransient<IImageFetcher>(
+                    s => new ImageFetcher(
+                        s.GetService<IContextFactory>(), 
+                        _configuration.GetValue<string>("UploadingPath"),
+                        _configuration.GetValue<string>("DefaultImageRelativePath")
+                        )
+                    )
                 .AddTransient<IDatabaseInitializer, DatabaseInitializer>();
         }
 
