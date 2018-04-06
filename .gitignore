@@ -269,5 +269,4 @@ __pycache__/
 *.pyc
 
 #Settings file
-appsettings.*.json
 !sample.appsettings.json
