@@ -31,3 +31,12 @@ body {
 .category-name:hover, .header-icon:hover {
     cursor: pointer;
 }
+
+.product-item:hover {
+    cursor: pointer;
+    background-color: rgba(164,203,255,0.47);
+}
+
+.selected-item {
+    background-color: rgba(164,203,255,0.47);
+}

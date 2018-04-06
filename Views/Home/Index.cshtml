@@ -33,7 +33,7 @@
                 <h3 class="text-center" ng-show="itemsLoaderVisible"><i class="fa fa-spinner fa-spin"></i> Загрузка...</h3>
                 <div ng-hide="itemsLoaderVisible">
                     <div class="item-head">
-                        <span class="header-icon"><i class="fa fa-plus-square fa-2x"></i></span>
+                        <span class="header-icon"><i class="fa fa-plus-square fa-2x" ng-click="createNewItem()"></i></span>
                         <span class="header-icon"><i class="fa fa-trash fa-2x"></i></span>
                         <span class="header-icon"><i class="fa fa-window-close-o fa-2x pull-right" ng-click="hideItemsWindow()"></i></span>
                         <hr/>
@@ -43,7 +43,7 @@
                             <tr>
                                 <th></th><th>Name</th><th>Price</th><th>Qty</th>
                             </tr>
-                            <tr ng-repeat="item in items">
+                            <tr ng-repeat="item in items" ng-click="selectItem(item, 'item'+item.Id)" id="item{{item.Id}}" class="product-item">
                                 <td><input type="checkbox"></td><td>{{item.Name}}</td><td>$ {{item.Price}}</td><td>{{item.Quantity}}</td>
                             </tr>
                         </table>
@@ -54,14 +54,14 @@
                 <h3 class="text-center" ng-show="detailLoaderVisible"><i class="fa fa-spinner fa-spin"></i> Загрузка...</h3>
                 <div class="detail-head" ng-hide="detailLoaderVisible">
                     <span class="header-icon"><i class="fa fa-save fa-2x"></i></span>
-                    <span class="header-icon"><i class="fa fa-times fa-2x"></i></span>
-                    <span class="header-icon"><i class="fa fa-window-close-o fa-2x pull-right"></i></span>
+                    <span class="header-icon"><i class="fa fa-times fa-2x" ng-click="hideDetailWindow()"></i></span>
+                    <span class="header-icon"><i class="fa fa-window-close-o fa-2x pull-right" ng-click="hideDetailWindow()"></i></span>
                     <hr/>
                     <form class="form-horizontal">
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Фото</label>
                             <div class="col-sm-8 col-sm-offset-2">
-                                <img ng-src="/api/product/1/image" width="64">
+                                <img ng-src="/api/product/{{currentItem.Id}}/image" width="64">
                                 <a href="#" ng-click="uploadImage()">Загрузить</a>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                         <div class="form-group">
                             <label for="productQuantity" class="col-sm-2 control-label">Количество</label>
                             <div class="col-sm-8 pull-right">
-                                <input type="text" class="form-control" id="productQuantity" placeholder="0.5" ng-model="currentItem.Qty">
+                                <input type="text" class="form-control" id="productQuantity" placeholder="0.5" ng-model="currentItem.Quantity">
                             </div>
                         </div>
                     </form>

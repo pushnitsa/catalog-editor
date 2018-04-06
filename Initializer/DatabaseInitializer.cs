@@ -29,7 +29,7 @@ namespace CatalogEditor.Initializer
 
                 await context.Categories.AddRangeAsync(category1, category2, category3, category4);
                 
-                var product = new Product
+                var product1 = new Product
                 {
                     Category = category1,
                     Name = "TestProduct",
@@ -37,8 +37,17 @@ namespace CatalogEditor.Initializer
                     Quantity = 100,
                     Image = "img.png"
                 };
+                
+                var product2 = new Product
+                {
+                    Category = category1,
+                    Name = "TestProduct2",
+                    Price = 20M,
+                    Quantity = 200,
+                    Image = "img.png"
+                };
 
-                await context.Products.AddAsync(product);
+                await context.Products.AddRangeAsync(product1, product2);
 
                 await context.SaveChangesAsync();
             }

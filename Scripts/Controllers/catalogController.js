@@ -4,12 +4,7 @@ catalogApp.controller('catalogController', ['$scope', 'apiCommunicator', functio
     
     apiCommunicator.getCategories($scope.categories = []);
     
-    $scope.currentItem = {
-        Image: 'empty.png',
-        Name: 'Test1',
-        Price: 0.5,
-        Qty: 10
-    };
+    $scope.currentItem = {};
 
     $scope.toggleVisible = function (category, elId) {
         
@@ -75,13 +70,58 @@ catalogApp.controller('catalogController', ['$scope', 'apiCommunicator', functio
     
     $scope.hideItemsWindow = function () {
         $scope.itemsWindowVisible = false;
+        $scope.hideDetailWindow();
+        purgeSelectedCategory();
     };
     
     $scope.detailWindowVisible = false;
     $scope.detailLoaderVisible = false;
     
+    $scope.selectItem = function (product, elId) {
+        $scope.detailWindowVisible = true;
+        
+        purgeSelectedItems();
+        
+        var el = $('#'+elId);
+        el.addClass('selected-item');
+        $scope.currentItem = product;
+        loadDetail();
+        $scope.detailWindowVisible = true;
+    };
+    
+    function purgeSelectedItems() {
+        if ($scope.currentItem.Name !== undefined &&
+            $scope.detailWindowVisible && 
+            confirm("Все изменения будут потеряны.")) {
+            
+            $scope.currentItem = {};
+
+            var itemElements = $('.product-item');
+
+            itemElements.each(function (key, value) {
+                $(value).removeClass('selected-item');
+            })
+        }
+    }
+    
+    function loadDetail() {
+        
+    }
+    
     function hideDetailLoader() {
         $scope.detailLoaderVisible = false;
+    }
+    
+    $scope.hideDetailWindow = function () {
+        if ($scope.detailWindowVisible && confirm("Все изменения будут потеряны.")) {
+            $scope.detailWindowVisible = false;
+            purgeSelectedItems();
+        }
+    };
+    
+    $scope.createNewItem = function () {
+        purgeSelectedItems();
+        $scope.detailWindowVisible = true;
     }
     
 }]);
